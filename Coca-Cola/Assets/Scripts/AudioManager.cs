@@ -27,4 +27,16 @@ public class AudioManager : MonoBehaviour
         audioSource.clip = audioClip;
         audioSource.Play();
     }
+
+    public void ChangeVolume(int amount)
+    {
+        int volume = Mathf.Clamp(amount, 0 , 100);
+        float volumeNormalized = volume / 100.0f;
+        audioSource.volume = volumeNormalized;
+    }
+
+    public float Get_ClipLenght(AudioClip clip)
+    {
+        return clip.length;
+    }
 }

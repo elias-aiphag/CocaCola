@@ -11,12 +11,14 @@ public class Estacion : MonoBehaviour
     [SerializeField] private String title;
 
     [Header("Audio")]
-    [SerializeField] private AudioManager audioManager;
-    [SerializeField] private AudioClip[] audioSound;
+    //[SerializeField] private AudioManager audioManager;
+    [SerializeField] private AudioClip audioSound;
+    [SerializeField] private float _clipDuration;
 
     void Start()
     {
         ReloadTitle(title);
+        PlayClip();
     }
 
     private void ReloadTitle(string s)
@@ -25,14 +27,11 @@ public class Estacion : MonoBehaviour
         mainText.text = _text;
     }
 
-    public void PlayClip(int number)
+    public void PlayClip()
     {
-        AudioClip clip = audioSound[number];
-        audioManager.PlayAudioClip(clip);
-    }
-
-    private void LoadClipSound(AudioClip aClip)
-    {
-        audioManager.PlayAudioClip(aClip);
+        AudioClip clip = audioSound;
+        AudioManager.ins.PlayAudioClip(clip);
+        AudioManager.ins.ChangeVolume(10);
+        _clipDuration = AudioManager.ins.Get_ClipLenght(clip);
     }
 }
