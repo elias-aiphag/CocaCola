@@ -68,7 +68,7 @@ public class ARManager : MonoBehaviour
         Active_One_Estaciones(_counter);
         
         _counter ++;
-        
+
         if(_counter == 1)
         {
             Set_Text_HelpText("ESCANEA EL LOGO");
@@ -80,6 +80,7 @@ public class ARManager : MonoBehaviour
             Set_Text_HelpText("MIRA EL VIDEO");
             Set_ScanButton(false);
         }
+        
         else
         {
             return;
