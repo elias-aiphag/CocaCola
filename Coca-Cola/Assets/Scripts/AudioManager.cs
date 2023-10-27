@@ -39,4 +39,9 @@ public class AudioManager : MonoBehaviour
     {
         return clip.length;
     }
+
+    public void Get_AudioClipFinished()
+    {
+        Debug.Log("Has ended");
+    }
 }
