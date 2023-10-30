@@ -10,6 +10,7 @@ public class ARManager : MonoBehaviour
     public static ARManager ins;
 
     [Header("UI")]
+    [SerializeField] private GameObject StaticCanvas;
     [SerializeField] private TextMeshProUGUI helpText;
     [SerializeField] private TextMeshProUGUI audioClipDurationText;
     [SerializeField] private Button scanButton;
@@ -25,7 +26,7 @@ public class ARManager : MonoBehaviour
         Init();
 
         Set_Enabled_ImageManager(false);
-        Set_Text_HelpText("Precione el boton 'activate'");
+        Set_Text_HelpText("Precione el boton 'scan'");
     }
 
     private void Init()
@@ -37,6 +38,12 @@ public class ARManager : MonoBehaviour
         } else {
             Destroy(gameObject);
         }
+    }
+
+    private void Set_Enabled_StaticCanvas(bool status)
+    {
+        bool s = status;
+        StaticCanvas.gameObject.SetActive(s);
     }
 
     public void Set_Enabled_ImageManager(bool status)

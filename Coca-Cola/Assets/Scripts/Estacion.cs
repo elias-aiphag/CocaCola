@@ -15,6 +15,9 @@ public class Estacion : MonoBehaviour
     [SerializeField] private float _clipDuration = 2.0f;
     [SerializeField] private bool _ended;
 
+    [Header("TargetManager")]
+    [SerializeField] private TargetManager targetManager;
+
     void Start()
     {
         ReloadTitle(title);
@@ -44,11 +47,10 @@ public class Estacion : MonoBehaviour
     {
         Debug.Log(title + " has ended, can continue");
         _ended = true;
-        ARManager.ins.Next();
+        //ARManager.ins.Next();
+        targetManager.Set_Enable_target(true);
 
-        Deactive();
-
-        //ARManager.ins.Set_scanButton(_ended);     //Revisar, necesito que SOLO el primero active esto, el resto no.
+        //Deactive();
     }
 
     private void Deactive()
