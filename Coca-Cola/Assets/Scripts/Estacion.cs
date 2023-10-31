@@ -12,11 +12,14 @@ public class Estacion : MonoBehaviour
 
     [Header("Audio")]
     [SerializeField] private AudioClip audioSound;
-    [SerializeField] private float _clipDuration = 2.0f;
+    [SerializeField] private float _clipDuration;
     [SerializeField] private bool _ended;
 
     [Header("TargetManager")]
     [SerializeField] private TargetManager targetManager;
+
+    [Header("UI")]
+    [SerializeField] private TextMeshProUGUI audioLenght_text;
 
     void Start()
     {
@@ -38,7 +41,9 @@ public class Estacion : MonoBehaviour
 
         _clipDuration = AudioManager.ins.Get_ClipLenght(clip);
         string s = _clipDuration.ToString();
+
         ARManager.ins.Set_Text_AudioClipDuration(s);
+        audioLenght_text.text = s;
 
         Invoke("ClipEnded",_clipDuration);
     }
@@ -47,9 +52,8 @@ public class Estacion : MonoBehaviour
     {
         Debug.Log(title + " has ended, can continue");
         _ended = true;
-        //ARManager.ins.Next();
         targetManager.Set_Enable_target(true);
-
+        //ARManager.ins.Next();
         //Deactive();
     }
 

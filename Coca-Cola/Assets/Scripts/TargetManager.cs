@@ -15,6 +15,7 @@ public class TargetManager : MonoBehaviour
 
     private void Init()
     {
+        staticCanvas.SetActive(true);
         target.SetActive(false);
     }
 
