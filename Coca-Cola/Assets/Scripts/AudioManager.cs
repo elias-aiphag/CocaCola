@@ -44,4 +44,10 @@ public class AudioManager : MonoBehaviour
     {
         Debug.Log("Has ended");
     }
+
+    public float Get_Clip_Time()
+    {
+        float _t = audioSource.time;
+        return _t;
+    }
 }
