@@ -16,13 +16,16 @@ public class Estacion : MonoBehaviour
     [SerializeField] private float _clipDuration;
     [SerializeField] private bool _ended;
 
-    [Header("TargetManager")]
-    [SerializeField] private TargetManager targetManager;
-
     [Header("UI")]
     [SerializeField] private TextMeshProUGUI audioLenght_text;
     [SerializeField] private Slider sliderAudioLenght;
+    /*
+    [Header("Small Video Player")]
+    [SerializeField] private List<SmallVideo> smallVideo;
 
+    [Header("Video Player")]
+    [SerializeField] private List<VideoPlayer> videoPlayer;
+    */
     void Start()
     {
         ReloadTitle(title);
@@ -30,7 +33,7 @@ public class Estacion : MonoBehaviour
     }
 
     void LateUpdate()
-    { 
+    {
         ClipTime();
     }
 
@@ -55,20 +58,27 @@ public class Estacion : MonoBehaviour
 
         //Set ClipLength
         _clipDuration = AudioManager.ins.Get_ClipLenght(clip);
-        //string s = _clipDuration.ToString();
         ClipLenght(_clipDuration);
 
+        float _timerToKeyword = 2.0f;   //Timer hasta que el audio diga "24.000 botellas"
+        Invoke(nameof(Active_SmallVideoPlayer), _timerToKeyword);
+
         //Ended
-        Invoke("ClipEnded",_clipDuration);
+        Invoke(nameof(ClipEnded), _clipDuration);
     }
 
     public void ClipEnded()
     {
         Debug.Log(title + " has ended, can continue");
         _ended = true;
-        targetManager.Set_Enable_target(true);
-        //ARManager.ins.Next();
+        ARManager.ins.Next();
         //Deactive();
+    }
+
+    public void Active_SmallVideoPlayer()
+    {
+        ARManager.ins.targetManager.Set_Enable_target(true);
+        ARManager.ins.Set_active_smallVideoPlayer(0);
     }
 
     private void Deactive()

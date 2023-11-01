@@ -12,11 +12,18 @@ public class ARManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI helpText;
     [SerializeField] private TextMeshProUGUI audioClipDurationText;
     [SerializeField] private Button scanButton;
+
     [Header("AR")]
     [SerializeField] private ARTrackedImageManager imageManager;
-    [Header("Estaciones")]
-    [SerializeField] private List<Estacion> estaciones;
 
+    [Header("Target Manager")]
+    [SerializeField] public TargetManager targetManager;
+
+    [Header("VideoObjects")]
+    [SerializeField] private List<SmallVideo> smallVideoPlayer;
+    [SerializeField] private List<VideoPlayer> bigVideoPlayer;
+
+    [Header("Counter")]
     [SerializeField] private int _counter = 0;
 
     void Awake()
@@ -64,20 +71,22 @@ public class ARManager : MonoBehaviour
 
     public void Next()
     {
-        Active_One_Estaciones(_counter);
-        
+        //targetManager.Set_Enable_target(true);
         _counter ++;
 
         if(_counter == 1)
         {
-            Set_Text_HelpText("ESCANEA EL LOGO");
-            Set_ScanButton(true);
+            Set_deactivate_All_SmallVideo();
+            Active_videoPlayer(_counter);
+
+            //Set_Text_HelpText("ESCANEA EL LOGO");
+            //Set_ScanButton(true);
         }
         
         if(_counter == 2)
         {
-            Set_Text_HelpText("MIRA EL VIDEO");
-            Set_ScanButton(false);
+            //Set_Text_HelpText("MIRA EL VIDEO");
+            //Set_ScanButton(false);
         }
         
         else
@@ -87,17 +96,31 @@ public class ARManager : MonoBehaviour
         
     }
 
-    private void Active_One_Estaciones(int i)
+    public void Active_videoPlayer(int i)
     {
-        Deactivate_All_Estaciones();
-        estaciones[i].gameObject.SetActive(true);
+        Deactivate_All_VideoPlayer();
+        bigVideoPlayer[i].gameObject.SetActive(true);
     }
 
-    private void Deactivate_All_Estaciones()
+    private void Deactivate_All_VideoPlayer()
     {
-        foreach(Estacion e in estaciones)
+        foreach(VideoPlayer e in bigVideoPlayer)
         {
             e.gameObject.SetActive(false);
+        }
+    }
+
+    public void Set_active_smallVideoPlayer(int i)
+    {
+        Set_deactivate_All_SmallVideo();
+        smallVideoPlayer[i].gameObject.SetActive(true);
+    }
+
+    private void Set_deactivate_All_SmallVideo()
+    {
+        foreach(SmallVideo sm in smallVideoPlayer)
+        {
+            sm.gameObject.SetActive(false);
         }
     }
 }
