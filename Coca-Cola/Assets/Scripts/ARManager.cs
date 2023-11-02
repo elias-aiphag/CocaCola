@@ -9,12 +9,6 @@ public class ARManager : MonoBehaviour
 {
     public static ARManager ins;
 
-    [Header("UI")]
-    [SerializeField] private TextMeshProUGUI helpText;
-    [SerializeField] private TextMeshProUGUI audioClipDurationText;
-    [SerializeField] private Button scanButton;
-
-
     [Header("AR")]
     [SerializeField] private ARTrackedImageManager imageManager;
 
@@ -36,7 +30,6 @@ public class ARManager : MonoBehaviour
         Init();
 
         Set_Enabled_ImageManager(false);
-        Set_Text_HelpText("Precione el boton 'scan'");
     }
 
     private void Init()
@@ -87,24 +80,6 @@ public class ARManager : MonoBehaviour
     {
         //imageManager.enabled = status;
         Debug.Log("Image Manager Set Enabled : " + status);
-    }
-
-    public void Set_Text_HelpText(string s)
-    {
-        string message = s;
-        //helpText.text = message;
-    }
-
-    public void Set_Text_AudioClipDuration(string s)
-    {
-        string message = s;
-        //audioClipDurationText.text = message;
-    }
-
-    public void Set_ScanButton(bool s)
-    {
-        bool status = s;
-        //scanButton.interactable = status;
     }
 
     public void Next()

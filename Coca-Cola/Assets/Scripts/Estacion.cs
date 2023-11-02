@@ -28,7 +28,6 @@ public class Estacion : MonoBehaviour
 
         ReloadTitle(title);
         PlayClip();
-        ARManager.ins.Set_Text_HelpText("Esperar a que termine el audio completo, a los 2 min, se deberia activar Small Video");
     }
 
     void LateUpdate()
@@ -71,21 +70,6 @@ public class Estacion : MonoBehaviour
 
         //Ended
         Invoke(nameof(ClipEnded), _clipDuration);
-
-        if(clip == null)
-        {
-            ARManager.ins.Set_Text_HelpText("PROBLEMA CON EL AUDIOCLIP");
-        }
-        
-        if(audioSound == null)
-        {
-            ARManager.ins.Set_Text_HelpText("PROBLEMA CON EL AUDIOSOUND");
-        }
-
-        else
-        {
-            ARManager.ins.Set_Text_HelpText("TODO OK");
-        }
     }
 
     public void ClipEnded()
@@ -114,7 +98,6 @@ public class Estacion : MonoBehaviour
 
         //Set as String
         string message = f.ToString();
-        ARManager.ins.Set_Text_AudioClipDuration(message);
         audioLenght_text.text = message;
     }
 }
