@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using TMPro;
 using UnityEngine.UI;
+using Unity.XR.CoreUtils;
 
 public class ARManager : MonoBehaviour
 {
@@ -13,8 +14,6 @@ public class ARManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI audioClipDurationText;
     [SerializeField] private Button scanButton;
 
-    [Header("Arrow")]
-    [SerializeField] private GameObject arrow;
 
     [Header("AR")]
     [SerializeField] private ARTrackedImageManager imageManager;
@@ -24,7 +23,10 @@ public class ARManager : MonoBehaviour
 
     [Header("VideoObjects")]
     [SerializeField] private List<SmallVideo> smallVideoPlayer;
-    [SerializeField] private List<VideoPlayer> bigVideoPlayer;
+    [SerializeField] private List<BigVideoPlayer> bigVideoPlayer;
+
+    [Header("Arrow")]
+    [SerializeField] public Arrow arrow;
 
     [Header("Counter")]
     [SerializeField] private int _counter = 0;
@@ -46,6 +48,39 @@ public class ARManager : MonoBehaviour
         } else {
             Destroy(gameObject);
         }
+    }
+
+    public void Reload_BaseVariables()
+    {
+        //Set TARGET MANAGER
+        targetManager = GameObject.Find("3D_Enviroment(Clone)").GetComponent<TargetManager>();
+
+        //Set SMALL VIDEO PLAYER
+        SmallVideo _aux_smallVideo = GameObject.Find("3D_Enviroment(Clone)")
+            .transform.GetChild(1).gameObject
+            .transform.GetChild(0).gameObject
+            .GetComponent<SmallVideo>();
+
+        smallVideoPlayer.Add(_aux_smallVideo);
+
+        //Set BIG VIDEO PLAYERs
+        BigVideoPlayer _aux_bigVideo_I = GameObject.Find("3D_Enviroment(Clone)")
+            .transform.GetChild(1).gameObject
+            .transform.GetChild(1).gameObject
+            .GetComponent<BigVideoPlayer>();
+        bigVideoPlayer.Add(_aux_bigVideo_I);
+
+        BigVideoPlayer _aux_bigVideo_II = GameObject.Find("3D_Enviroment(Clone)")
+            .transform.GetChild(1).gameObject
+            .transform.GetChild(3).gameObject
+            .GetComponent<BigVideoPlayer>();
+        bigVideoPlayer.Add(_aux_bigVideo_II);
+
+        //Set ARROW
+        arrow = GameObject.Find("3D_Enviroment(Clone)")
+            .transform.GetChild(1).gameObject
+            .transform.GetChild(2).gameObject
+            .GetComponent<Arrow>();
     }
 
     public void Set_Enabled_ImageManager(bool status)
@@ -78,26 +113,29 @@ public class ARManager : MonoBehaviour
 
         if(_counter == 1)
         {
-            Set_Text_HelpText("Activa el primer video");
-            Set_deactivate_All_SmallVideo();
+            Set_Text_HelpText("Activa el primer Big video player");
+            Deactivate_All_SmallVideo();
             Deactivate_All_VideoPlayer();
             Active_videoPlayer(0);
-
-            Set_Enable_Arrow(true);
         }
 
         //on clip ended de bigVideoPlayer,llamar a Next()
         if(_counter == 2)
         {
-            Set_Text_HelpText("Activa el segundo video");
+            Set_Text_HelpText("Activa arrow y despues de 5 seg, el segundo Big video player");
+            Deactivate_All_VideoPlayer();
+            Set_Enable_Arrow(true);
+
+            float _timer = 5.0f;    //Timer para que active el proximo Big Video Player
+            Invoke(nameof(Next), _timer);
         }
         
         if(_counter == 3)
         {
             Set_Text_HelpText("Activa el segundo video");
             Deactivate_All_VideoPlayer();
-            Active_videoPlayer(1);
             Set_Enable_Arrow(false);
+            Active_videoPlayer(1);
         }
         
         else
@@ -121,7 +159,7 @@ public class ARManager : MonoBehaviour
 
     private void Deactivate_All_VideoPlayer()
     {
-        foreach(VideoPlayer e in bigVideoPlayer)
+        foreach(BigVideoPlayer e in bigVideoPlayer)
         {
             e.gameObject.SetActive(false);
         }
@@ -129,11 +167,11 @@ public class ARManager : MonoBehaviour
 
     public void Set_active_smallVideoPlayer(int i)
     {
-        Set_deactivate_All_SmallVideo();
+        Deactivate_All_SmallVideo();
         smallVideoPlayer[i].gameObject.SetActive(true);
     }
 
-    private void Set_deactivate_All_SmallVideo()
+    private void Deactivate_All_SmallVideo()
     {
         foreach(SmallVideo sm in smallVideoPlayer)
         {

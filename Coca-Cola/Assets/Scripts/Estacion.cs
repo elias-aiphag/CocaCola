@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,13 +23,21 @@ public class Estacion : MonoBehaviour
     
     void Start()
     {
+        VariablesToARManager();
+
         ReloadTitle(title);
         PlayClip();
+        ARManager.ins.Set_Text_HelpText("Esperar a que termine el audio completo, a los 2 min, se deberia activar Small Video");
     }
 
     void LateUpdate()
     {
         ClipTime();
+    }
+
+    private void VariablesToARManager()
+    {
+        ARManager.ins.Reload_BaseVariables();
     }
 
     private void ReloadTitle(string s)
@@ -59,6 +68,21 @@ public class Estacion : MonoBehaviour
 
         //Ended
         Invoke(nameof(ClipEnded), _clipDuration);
+
+        if(clip == null)
+        {
+            ARManager.ins.Set_Text_HelpText("PROBLEMA CON EL AUDIOCLIP");
+        }
+        
+        if(audioSound == null)
+        {
+            ARManager.ins.Set_Text_HelpText("PROBLEMA CON EL AUDIOSOUND");
+        }
+
+        else
+        {
+            ARManager.ins.Set_Text_HelpText("TODO OK");
+        }
     }
 
     public void ClipEnded()
