@@ -19,13 +19,7 @@ public class Estacion : MonoBehaviour
     [Header("UI")]
     [SerializeField] private TextMeshProUGUI audioLenght_text;
     [SerializeField] private Slider sliderAudioLenght;
-    /*
-    [Header("Small Video Player")]
-    [SerializeField] private List<SmallVideo> smallVideo;
-
-    [Header("Video Player")]
-    [SerializeField] private List<VideoPlayer> videoPlayer;
-    */
+    
     void Start()
     {
         ReloadTitle(title);
