@@ -42,8 +42,6 @@ public class BigVideoPlayer : MonoBehaviour
         videoPlayer.Stop();
         ARManager.ins.Next();
         Deactive();
-
-        Debug.Log(this.name + "videoclip has ended " + _ended);
     }
 
     private void Deactive()

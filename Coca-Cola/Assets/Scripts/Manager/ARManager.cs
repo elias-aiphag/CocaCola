@@ -9,9 +9,6 @@ public class ARManager : MonoBehaviour
 {
     public static ARManager ins;
 
-    [Header("AR")]
-    [SerializeField] private ARTrackedImageManager imageManager;
-
     [Header("Target Manager")]
     [SerializeField] public TargetManager targetManager;
 
@@ -28,8 +25,6 @@ public class ARManager : MonoBehaviour
     void Awake()
     {
         Init();
-
-        Set_Enabled_ImageManager(false);
     }
 
     private void Init()
@@ -41,39 +36,6 @@ public class ARManager : MonoBehaviour
         } else {
             Destroy(gameObject);
         }
-    }
-
-    public void Reload_BaseVariables()
-    {
-        //Set TARGET MANAGER
-        targetManager = GameObject.Find("3D_Enviroment(Clone)").GetComponent<TargetManager>();
-
-        //Set SMALL VIDEO PLAYER
-        SmallVideo _aux_smallVideo = GameObject.Find("3D_Enviroment(Clone)")
-            .transform.GetChild(1).gameObject
-            .transform.GetChild(0).gameObject
-            .GetComponent<SmallVideo>();
-
-        smallVideoPlayer.Add(_aux_smallVideo);
-
-        //Set BIG VIDEO PLAYERs
-        BigVideoPlayer _aux_bigVideo_I = GameObject.Find("3D_Enviroment(Clone)")
-            .transform.GetChild(1).gameObject
-            .transform.GetChild(1).gameObject
-            .GetComponent<BigVideoPlayer>();
-        bigVideoPlayer.Add(_aux_bigVideo_I);
-
-        BigVideoPlayer _aux_bigVideo_II = GameObject.Find("3D_Enviroment(Clone)")
-            .transform.GetChild(1).gameObject
-            .transform.GetChild(3).gameObject
-            .GetComponent<BigVideoPlayer>();
-        bigVideoPlayer.Add(_aux_bigVideo_II);
-
-        //Set ARROW
-        arrow = GameObject.Find("3D_Enviroment(Clone)")
-            .transform.GetChild(1).gameObject
-            .transform.GetChild(2).gameObject
-            .GetComponent<Arrow>();
     }
 
     public void Set_Enabled_ImageManager(bool status)

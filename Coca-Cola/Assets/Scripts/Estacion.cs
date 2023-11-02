@@ -13,7 +13,6 @@ public class Estacion : MonoBehaviour
     [SerializeField] private String title;
 
     [Header("Audio")]
-    [SerializeField] private AudioManager audioManager;
     [SerializeField] private AudioClip audioSound;
     [SerializeField] private float _clipDuration;
     [SerializeField] private bool _ended;
@@ -24,8 +23,6 @@ public class Estacion : MonoBehaviour
     
     void Start()
     {
-        //VariablesToARManager();
-
         ReloadTitle(title);
         PlayClip();
     }
@@ -33,13 +30,6 @@ public class Estacion : MonoBehaviour
     void LateUpdate()
     {
         ClipTime();
-    }
-
-    private void VariablesToARManager()
-    {
-        ARManager.ins.Reload_BaseVariables();
-        audioManager = AudioManager.ins;
-        //AudioManager.ins.Reload_BaseVariables();
     }
 
     private void ReloadTitle(string s)
@@ -59,7 +49,7 @@ public class Estacion : MonoBehaviour
         //CLIPS
         AudioClip clip = audioSound;
         AudioManager.ins.PlayAudioClip(clip);
-        AudioManager.ins.ChangeVolume(10);
+        AudioManager.ins.ChangeVolume(50);
 
         //Set ClipLength
         _clipDuration = AudioManager.ins.Get_ClipLenght(clip);
