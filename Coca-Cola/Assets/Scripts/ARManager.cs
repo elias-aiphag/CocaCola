@@ -13,6 +13,9 @@ public class ARManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI audioClipDurationText;
     [SerializeField] private Button scanButton;
 
+    [Header("Arrow")]
+    [SerializeField] private GameObject arrow;
+
     [Header("AR")]
     [SerializeField] private ARTrackedImageManager imageManager;
 
@@ -71,22 +74,30 @@ public class ARManager : MonoBehaviour
 
     public void Next()
     {
-        //targetManager.Set_Enable_target(true);
         _counter ++;
 
         if(_counter == 1)
         {
+            Set_Text_HelpText("Activa el primer video");
             Set_deactivate_All_SmallVideo();
-            Active_videoPlayer(_counter);
+            Deactivate_All_VideoPlayer();
+            Active_videoPlayer(0);
 
-            //Set_Text_HelpText("ESCANEA EL LOGO");
-            //Set_ScanButton(true);
+            Set_Enable_Arrow(true);
         }
-        
+
+        //on clip ended de bigVideoPlayer,llamar a Next()
         if(_counter == 2)
         {
-            //Set_Text_HelpText("MIRA EL VIDEO");
-            //Set_ScanButton(false);
+            Set_Text_HelpText("Activa el segundo video");
+        }
+        
+        if(_counter == 3)
+        {
+            Set_Text_HelpText("Activa el segundo video");
+            Deactivate_All_VideoPlayer();
+            Active_videoPlayer(1);
+            Set_Enable_Arrow(false);
         }
         
         else
@@ -94,6 +105,12 @@ public class ARManager : MonoBehaviour
             return;
         }
         
+    }
+
+    private void Set_Enable_Arrow(bool _b)
+    {
+        bool status  = _b;
+        arrow.gameObject.SetActive(status);
     }
 
     public void Active_videoPlayer(int i)

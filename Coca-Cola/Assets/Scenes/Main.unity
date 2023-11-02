@@ -1825,6 +1825,7 @@ MonoBehaviour:
   helpText: {fileID: 340463088}
   audioClipDurationText: {fileID: 648625994}
   scanButton: {fileID: 2023586635}
+  arrow: {fileID: 7298755035260780637}
   imageManager: {fileID: 1659859600}
   targetManager: {fileID: 7298755035243955982}
   smallVideoPlayer:
