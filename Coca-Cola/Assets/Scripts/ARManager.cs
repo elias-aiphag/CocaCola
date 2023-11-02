@@ -85,26 +85,26 @@ public class ARManager : MonoBehaviour
 
     public void Set_Enabled_ImageManager(bool status)
     {
-        imageManager.enabled = status;
+        //imageManager.enabled = status;
         Debug.Log("Image Manager Set Enabled : " + status);
     }
 
     public void Set_Text_HelpText(string s)
     {
         string message = s;
-        helpText.text = message;
+        //helpText.text = message;
     }
 
     public void Set_Text_AudioClipDuration(string s)
     {
         string message = s;
-        audioClipDurationText.text = message;
+        //audioClipDurationText.text = message;
     }
 
     public void Set_ScanButton(bool s)
     {
         bool status = s;
-        scanButton.interactable = status;
+        //scanButton.interactable = status;
     }
 
     public void Next()
@@ -113,7 +113,7 @@ public class ARManager : MonoBehaviour
 
         if(_counter == 1)
         {
-            Set_Text_HelpText("Activa el primer Big video player");
+            //Set_Text_HelpText("Activa el primer Big video player");
             Deactivate_All_SmallVideo();
             Deactivate_All_VideoPlayer();
             Active_videoPlayer(0);
@@ -122,7 +122,7 @@ public class ARManager : MonoBehaviour
         //on clip ended de bigVideoPlayer,llamar a Next()
         if(_counter == 2)
         {
-            Set_Text_HelpText("Activa arrow y despues de 5 seg, el segundo Big video player");
+            //Set_Text_HelpText("Activa arrow y despues de 5 seg, el segundo Big video player");
             Deactivate_All_VideoPlayer();
             Set_Enable_Arrow(true);
 
@@ -132,7 +132,7 @@ public class ARManager : MonoBehaviour
         
         if(_counter == 3)
         {
-            Set_Text_HelpText("Activa el segundo video");
+            //Set_Text_HelpText("Activa el segundo video");
             Deactivate_All_VideoPlayer();
             Set_Enable_Arrow(false);
             Active_videoPlayer(1);

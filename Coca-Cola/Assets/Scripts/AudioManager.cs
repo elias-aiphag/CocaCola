@@ -8,6 +8,8 @@ public class AudioManager : MonoBehaviour
     public static AudioManager ins;
 
     [SerializeField] public AudioSource audioSource;
+    [SerializeField] public AudioClip audioClip;
+
 
     private void Awake()
     {
@@ -20,6 +22,12 @@ public class AudioManager : MonoBehaviour
         }
 
         audioSource = GetComponent<AudioSource>();
+    }
+
+    public void Reload_BaseVariables()
+    {
+        audioSource = GetComponent<AudioSource>();
+        audioClip = audioSource.clip;
     }
 
     public void PlayAudioClip(AudioClip audioClip)

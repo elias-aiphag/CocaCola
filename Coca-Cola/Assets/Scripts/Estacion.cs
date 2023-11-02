@@ -13,6 +13,7 @@ public class Estacion : MonoBehaviour
     [SerializeField] private String title;
 
     [Header("Audio")]
+    [SerializeField] private AudioManager audioManager;
     [SerializeField] private AudioClip audioSound;
     [SerializeField] private float _clipDuration;
     [SerializeField] private bool _ended;
@@ -23,7 +24,7 @@ public class Estacion : MonoBehaviour
     
     void Start()
     {
-        VariablesToARManager();
+        //VariablesToARManager();
 
         ReloadTitle(title);
         PlayClip();
@@ -38,6 +39,8 @@ public class Estacion : MonoBehaviour
     private void VariablesToARManager()
     {
         ARManager.ins.Reload_BaseVariables();
+        audioManager = AudioManager.ins;
+        //AudioManager.ins.Reload_BaseVariables();
     }
 
     private void ReloadTitle(string s)
