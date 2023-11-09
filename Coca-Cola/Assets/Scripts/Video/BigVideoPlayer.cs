@@ -8,13 +8,8 @@ public class BigVideoPlayer : MonoBehaviour
 {
     [SerializeField] private double _videoLenght; //Convert to float
     [SerializeField] private bool _ended;
+    [SerializeField] private bool _callNext;
     [SerializeField] private VideoPlayer videoPlayer;
-
-    public void Set_Enable_videoPlayer(bool _b)
-    {
-        bool status = _b;
-        this.gameObject.SetActive(status);
-    }
 
     void Start()
     {
@@ -38,10 +33,11 @@ public class BigVideoPlayer : MonoBehaviour
     {
         bool b = true;
         _ended = b;
-
         videoPlayer.Stop();
-        ARManager.ins.Next();
-        Deactive();
+
+        if(_callNext) {ARManager.ins.Next();}
+
+        //Deactive();
     }
 
     private void Deactive()

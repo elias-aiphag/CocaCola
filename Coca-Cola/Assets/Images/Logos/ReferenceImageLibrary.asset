@@ -34,9 +34,9 @@ MonoBehaviour:
       m_GuidLow: 3932984790126911073
       m_GuidHigh: 4690594318579695226
     m_Size: {x: 0.7, y: 0.7}
-    m_SpecifySize: 1
+    m_SpecifySize: 0
     m_Name: InvokeTarget_COLA
-    m_Texture: {fileID: 2800000, guid: 2a875e61c4d436947a7e6850ae561841, type: 3}
+    m_Texture: {fileID: 0}
   - m_SerializedGuid:
       m_GuidLow: 5098793258100276067
       m_GuidHigh: 10361648110332387244

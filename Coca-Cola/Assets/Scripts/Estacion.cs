@@ -12,11 +12,6 @@ public class Estacion : MonoBehaviour
     [SerializeField] private TextMeshProUGUI mainText;
     [SerializeField] private String title;
 
-    [Header("Audio")]
-    [SerializeField] private AudioClip audioSound;
-    [SerializeField] private float _clipDuration;
-    [SerializeField] private bool _ended;
-
     [Header("UI")]
     [SerializeField] private TextMeshProUGUI audioLenght_text;
     [SerializeField] private Slider sliderAudioLenght;
@@ -24,12 +19,9 @@ public class Estacion : MonoBehaviour
     void Start()
     {
         ReloadTitle(title);
-        PlayClip();
-    }
 
-    void LateUpdate()
-    {
-        ClipTime();
+        //Invoke(nameof(NextEvent), 4.0f);    //time to next event, synced to "24.000 botellas"
+        //Invoke(nameof(NextEvent), _clipDuration);
     }
 
     private void ReloadTitle(string s)
@@ -38,42 +30,37 @@ public class Estacion : MonoBehaviour
         mainText.text = _text;
     }
 
-    public void ClipTime()
+    public void SliderUpdate(float f)
     {
-        float _t = AudioManager.ins.Get_Clip_Time();
-        sliderAudioLenght.value = _t;
+        float _f = f;
+        sliderAudioLenght.value = _f;
+        //Debug.Log("slider audio lenght : " + _f);
     }
 
-    public void PlayClip()
+    public void SliderMaxAmp(float f)
     {
-        //CLIPS
-        AudioClip clip = audioSound;
-        AudioManager.ins.PlayAudioClip(clip);
-        AudioManager.ins.ChangeVolume(50);
+        float _f = f;
+        sliderAudioLenght.maxValue = _f;
+        //Debug.Log("slider max amplitude : " + f);
+    }
 
-        //Set ClipLength
-        _clipDuration = AudioManager.ins.Get_ClipLenght(clip);
-        ClipLenght(_clipDuration);
-
-        float _timerToKeyword = 2.0f;   //Timer hasta que el audio diga "24.000 botellas"
-        Invoke(nameof(Active_SmallVideoPlayer), _timerToKeyword);
-
-        //Ended
-        Invoke(nameof(ClipEnded), _clipDuration);
+    public void TextAudioLenght(float f)
+    {
+        string _s = f.ToString();
+        audioLenght_text.text = _s;
+        //Debug.Log("audio lenght text : " + _s);
     }
 
     public void ClipEnded()
     {
         Debug.Log(title + " has ended, can continue");
-        _ended = true;
-        ARManager.ins.Next();
+        //sARManager.ins.Next();
         //Deactive();
     }
 
-    public void Active_SmallVideoPlayer()
+    public void NextEvent()
     {
-        ARManager.ins.targetManager.Set_Enable_target(true);
-        ARManager.ins.Set_active_smallVideoPlayer(0);
+        ARManager.ins.Next();
     }
 
     private void Deactive()
@@ -81,13 +68,4 @@ public class Estacion : MonoBehaviour
         this.gameObject.SetActive(false);
     }
 
-    private void ClipLenght(float f)
-    {
-        //Set slider
-        sliderAudioLenght.maxValue = f;
-
-        //Set as String
-        string message = f.ToString();
-        audioLenght_text.text = message;
-    }
 }

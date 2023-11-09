@@ -9,9 +9,6 @@ public class ARManager : MonoBehaviour
 {
     public static ARManager ins;
 
-    [Header("Target Manager")]
-    [SerializeField] public TargetManager targetManager;
-
     [Header("VideoObjects")]
     [SerializeField] private List<SmallVideo> smallVideoPlayer;
     [SerializeField] private List<BigVideoPlayer> bigVideoPlayer;
@@ -38,41 +35,43 @@ public class ARManager : MonoBehaviour
         }
     }
 
-    public void Set_Enabled_ImageManager(bool status)
-    {
-        //imageManager.enabled = status;
-        Debug.Log("Image Manager Set Enabled : " + status);
-    }
-
     public void Next()
     {
         _counter ++;
 
         if(_counter == 1)
         {
-            //Set_Text_HelpText("Activa el primer Big video player");
-            Deactivate_All_SmallVideo();
-            Deactivate_All_VideoPlayer();
+            Debug.Log("When 2 seconds passed...");
             Active_videoPlayer(0);
         }
 
-        //on clip ended de bigVideoPlayer,llamar a Next()
         if(_counter == 2)
         {
-            //Set_Text_HelpText("Activa arrow y despues de 5 seg, el segundo Big video player");
-            Deactivate_All_VideoPlayer();
-            Set_Enable_Arrow(true);
-
-            float _timer = 5.0f;    //Timer para que active el proximo Big Video Player
-            Invoke(nameof(Next), _timer);
+            Debug.Log("When first audio ended...");
+            Deactivate_All_SmallVideo();
+            Active_videoPlayer(1);
         }
         
         if(_counter == 3)
         {
-            //Set_Text_HelpText("Activa el segundo video");
+            Debug.Log("When second video ended...");
             Deactivate_All_VideoPlayer();
+            Set_Enable_Arrow(true);
+            Invoke(nameof(Next),4.0f);
+        }
+
+        if(_counter == 4)
+        {
+            Debug.Log("When 4seg pased...");
+            Active_videoPlayer(2);
             Set_Enable_Arrow(false);
-            Active_videoPlayer(1);
+        }
+
+        if(_counter == 5)
+        {
+            Debug.Log("All finished...");
+            Deactivate_All_VideoPlayer();
+            Deactivate_All_SmallVideo();
         }
         
         else
