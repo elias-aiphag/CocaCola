@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 171773804656255217}
   - component: {fileID: 171773804656255220}
   m_Layer: 0
-  m_Name: Screen_Big0
+  m_Name: Screen_Big1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1078,7 +1078,7 @@ GameObject:
   - component: {fileID: 171773806030790975}
   - component: {fileID: 171773806030790974}
   m_Layer: 0
-  m_Name: Screen_Big1
+  m_Name: Screen_Big2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1624,7 +1624,7 @@ GameObject:
   - component: {fileID: 915582592327703374}
   - component: {fileID: 915582592327703375}
   m_Layer: 0
-  m_Name: Quad
+  m_Name: Screen_Big0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
