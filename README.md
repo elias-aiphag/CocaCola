@@ -23,7 +23,7 @@
     3DEnviroment
         -> Canvas
         -> Offset
-            -> SmallVideo (locusion audio)
+            -> SmallVideo (locution audio)
             -> VideoPlayer0s
             -> VideoPlayer1
             -> Arrow
