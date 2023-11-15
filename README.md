@@ -14,3 +14,19 @@
     ARKit Face Tracking 4.2.8
     OpenXR Plugin 1.8.1
     
+## Scene Setup
+
+    AR Session Origin (ARTrackedImageManager)
+        -> On read QR or Image Target (ReferenceImageLibrary)
+            -> Instantiate ( 3DEnviroment )
+    
+    3DEnviroment
+        -> Canvas
+        -> Offset
+            -> SmallVideo (locusion audio)
+            -> VideoPlayer0s
+            -> VideoPlayer1
+            -> Arrow
+            -> VideoPlayer2
+        -> ARManager (OnStart Removed from 3DEnviroment)
+    
