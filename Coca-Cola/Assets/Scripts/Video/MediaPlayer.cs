@@ -4,11 +4,11 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Video;
 
-public class BigVideoPlayer : MonoBehaviour
+public class MediaPlayer : MonoBehaviour
 {
     [SerializeField] private double _videoLenght; //Convert to float
+    [SerializeField] private bool _keepActive;
     [SerializeField] private bool _ended;
-    [SerializeField] private bool _callNext;
     [SerializeField] private VideoPlayer videoPlayer;
 
     void Start()
@@ -31,13 +31,17 @@ public class BigVideoPlayer : MonoBehaviour
 
     private void VideoClip_Ended()
     {
-        bool b = true;
-        _ended = b;
-        videoPlayer.Stop();
-
-        if(_callNext) {ARManager.ins.Next();}
-
-        //Deactive();
+        if(!_keepActive)
+        {
+            bool b = true;
+            _ended = b;
+            videoPlayer.Stop();
+            Deactive();
+        }
+        else
+        {
+            return;
+        }
     }
 
     private void Deactive()

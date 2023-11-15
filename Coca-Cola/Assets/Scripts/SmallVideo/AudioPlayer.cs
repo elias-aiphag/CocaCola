@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
 
-public class SmallVideo : MonoBehaviour
+public class AudioPlayer : MonoBehaviour
 {
     [Header("Media Lenght")]
     [SerializeField] private double _lenghtDouble;
@@ -16,6 +16,13 @@ public class SmallVideo : MonoBehaviour
     [Header("Media Lenght")]
     [SerializeField] private VideoPlayer videoPlayer;
     [SerializeField] private Estacion estacion;
+
+    [Header("Timers")]
+    [SerializeField] private float timeTo_Animation1;
+    [SerializeField] private float timeTo_Video1;
+    [SerializeField] private float timeTo_Arrow;
+    [SerializeField] private float timeTo_Animation2;
+    [SerializeField] private float timeTo_Video2;
 
     void Start()
     {
@@ -41,8 +48,13 @@ public class SmallVideo : MonoBehaviour
         Get_videoLenght();
         Set_estacionAmplitude();
 
-        Invoke(nameof(Call_NextEvent),2.0f);        //Hardcoded to synch with "24.000 botellas"
-        Invoke(nameof(Clip_Ended),_lenghtFloat);
+        Invoke(nameof(Call_Next), timeTo_Animation1);
+        Invoke(nameof(Call_Next),timeTo_Video1);
+        Invoke(nameof(Call_Next),timeTo_Arrow);
+        Invoke(nameof(Call_Next),timeTo_Animation2);
+        Invoke(nameof(Call_Next),timeTo_Video2);
+
+        //Invoke(nameof(Clip_Ended),_lenghtFloat);
     }
 
     public void Get_videoLenght()
@@ -75,12 +87,12 @@ public class SmallVideo : MonoBehaviour
         bool b = true;
         _ended = b;
 
-        Call_NextEvent();
+        Call_Next();
     }
 
-    private void Call_NextEvent()
+    private void Call_Next()
     {
-        estacion.NextEvent();
+        ARManager.ins.Next();
     }
 
     public float Double_To_Float(double _d)

@@ -19,9 +19,6 @@ public class Estacion : MonoBehaviour
     void Start()
     {
         ReloadTitle(title);
-
-        //Invoke(nameof(NextEvent), 4.0f);    //time to next event, synced to "24.000 botellas"
-        //Invoke(nameof(NextEvent), _clipDuration);
     }
 
     private void ReloadTitle(string s)
@@ -54,13 +51,8 @@ public class Estacion : MonoBehaviour
     public void ClipEnded()
     {
         Debug.Log(title + " has ended, can continue");
-        //sARManager.ins.Next();
         //Deactive();
-    }
-
-    public void NextEvent()
-    {
-        ARManager.ins.Next();
+        //sARManager.ins.Next();
     }
 
     private void Deactive()

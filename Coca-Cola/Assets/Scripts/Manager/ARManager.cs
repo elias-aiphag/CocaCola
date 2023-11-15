@@ -10,8 +10,8 @@ public class ARManager : MonoBehaviour
     public static ARManager ins;
 
     [Header("VideoObjects")]
-    [SerializeField] private List<SmallVideo> smallVideoPlayer;
-    [SerializeField] private List<BigVideoPlayer> bigVideoPlayer;
+    [SerializeField] private AudioPlayer audioPlayer;
+    [SerializeField] private List<MediaPlayer> bigVideoPlayer;
 
     [Header("Arrow")]
     [SerializeField] public Arrow arrow;
@@ -41,44 +41,38 @@ public class ARManager : MonoBehaviour
 
         if(_counter == 1)
         {
-            Debug.Log("When 2 seconds passed...");
-            Active_videoPlayer(0);
+            Debug.Log("time to : animacion 1");
+            Set_Status_videoPlayer(0, true);
         }
 
         if(_counter == 2)
         {
-            Debug.Log("When first audio ended...");
-            Deactivate_All_SmallVideo();
-            Active_videoPlayer(1);
+            Debug.Log("time to : video 1");
+            Set_Status_videoPlayer(1, true);
         }
         
         if(_counter == 3)
         {
-            Debug.Log("When second video ended...");
-            Deactivate_All_VideoPlayer();
+            Debug.Log("time to : arrow");
             Set_Enable_Arrow(true);
-            Invoke(nameof(Next),4.0f);
         }
 
         if(_counter == 4)
         {
-            Debug.Log("When 4seg pased...");
-            Active_videoPlayer(2);
-            Set_Enable_Arrow(false);
+            Debug.Log("time to : animacion 2");
+            Set_Status_videoPlayer(0, false);
+            Set_Status_videoPlayer(2, true);
         }
 
         if(_counter == 5)
         {
-            Debug.Log("All finished...");
-            Deactivate_All_VideoPlayer();
-            Deactivate_All_SmallVideo();
+            Debug.Log("time to : video 2");
+            Set_Status_videoPlayer(3, true);
+            Set_Status_videoPlayer(2, false);
+            Set_Enable_Arrow(false);
         }
         
-        else
-        {
-            return;
-        }
-        
+        else { return; }
     }
 
     private void Set_Enable_Arrow(bool _b)
@@ -87,31 +81,22 @@ public class ARManager : MonoBehaviour
         arrow.gameObject.SetActive(status);
     }
 
-    public void Active_videoPlayer(int i)
+    public void Set_Status_videoPlayer(int i, bool b)
     {
-        Deactivate_All_VideoPlayer();
-        bigVideoPlayer[i].gameObject.SetActive(true);
+        bigVideoPlayer[i].gameObject.SetActive(b);
     }
 
     private void Deactivate_All_VideoPlayer()
     {
-        foreach(BigVideoPlayer e in bigVideoPlayer)
+        foreach(MediaPlayer e in bigVideoPlayer)
         {
             e.gameObject.SetActive(false);
         }
     }
 
-    public void Set_active_smallVideoPlayer(int i)
+    public void Set_active_smallVideoPlayer(bool b)
     {
-        Deactivate_All_SmallVideo();
-        smallVideoPlayer[i].gameObject.SetActive(true);
-    }
-
-    private void Deactivate_All_SmallVideo()
-    {
-        foreach(SmallVideo sm in smallVideoPlayer)
-        {
-            sm.gameObject.SetActive(false);
-        }
+        bool _status = b;
+        audioPlayer.gameObject.SetActive(_status);
     }
 }
