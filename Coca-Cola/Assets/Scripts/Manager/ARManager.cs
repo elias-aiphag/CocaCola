@@ -19,8 +19,12 @@ public class ARManager : MonoBehaviour
     [Header("Counter")]
     [SerializeField] private int _counter = 0;
 
+    [Header("Canvas Static")]
+    [SerializeField] private Transform _staticUI;
+
     void Awake()
     {
+        Get_staticUI();
         Init();
     }
 
@@ -42,31 +46,38 @@ public class ARManager : MonoBehaviour
         if(_counter == 1)
         {
             Debug.Log("time to : animacion 1");
+
+            Set_parent_videoPlayer(0);
             Set_Status_videoPlayer(0, true);
         }
 
         if(_counter == 2)
         {
             Debug.Log("time to : video 1");
+
             Set_Status_videoPlayer(1, true);
         }
         
         if(_counter == 3)
         {
             Debug.Log("time to : arrow");
+
             Set_Enable_Arrow(true);
         }
 
         if(_counter == 4)
         {
             Debug.Log("time to : animacion 2");
-            Set_Status_videoPlayer(0, false);
+
+            Set_parent_videoPlayer(2);
             Set_Status_videoPlayer(2, true);
+            Set_Status_videoPlayer(0, false);
         }
 
         if(_counter == 5)
         {
             Debug.Log("time to : video 2");
+
             Set_Status_videoPlayer(3, true);
             Set_Status_videoPlayer(2, false);
             Set_Enable_Arrow(false);
@@ -86,6 +97,11 @@ public class ARManager : MonoBehaviour
         bigVideoPlayer[i].gameObject.SetActive(b);
     }
 
+    public void Set_parent_videoPlayer(int i)
+    {
+        bigVideoPlayer[i].transform.SetParent(_staticUI);
+    }
+
     private void Deactivate_All_VideoPlayer()
     {
         foreach(MediaPlayer e in bigVideoPlayer)
@@ -98,5 +114,11 @@ public class ARManager : MonoBehaviour
     {
         bool _status = b;
         audioPlayer.gameObject.SetActive(_status);
+    }
+
+    private void Get_staticUI()
+    {
+        GameObject _ui = GameObject.Find("Canvas_Static_UI");
+        _staticUI = _ui.gameObject.transform;
     }
 }
