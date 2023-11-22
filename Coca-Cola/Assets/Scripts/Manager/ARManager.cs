@@ -24,7 +24,7 @@ public class ARManager : MonoBehaviour
 
     void Awake()
     {
-        Get_staticUI();
+        //Get_staticUI();
         Init();
     }
 
@@ -47,7 +47,7 @@ public class ARManager : MonoBehaviour
         {
             Debug.Log("time to : animacion 1");
 
-            Set_parent_videoPlayer(0);
+            //Set_parent_videoPlayer(0);
             Set_Status_videoPlayer(0, true);
         }
 
@@ -55,6 +55,7 @@ public class ARManager : MonoBehaviour
         {
             Debug.Log("time to : video 1");
 
+            Set_Status_videoPlayer(0, false);
             Set_Status_videoPlayer(1, true);
         }
         
@@ -69,7 +70,7 @@ public class ARManager : MonoBehaviour
         {
             Debug.Log("time to : animacion 2");
 
-            Set_parent_videoPlayer(2);
+            //Set_parent_videoPlayer(2);
             Set_Status_videoPlayer(2, true);
             Set_Status_videoPlayer(0, false);
         }

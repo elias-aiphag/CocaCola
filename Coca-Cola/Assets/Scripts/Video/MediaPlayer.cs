@@ -19,7 +19,7 @@ public class MediaPlayer : MonoBehaviour
     private void Init()
     {
         Get_videoLenght();
-        Invoke(nameof(VideoClip_Ended),(float)_videoLenght);
+        //Invoke(nameof(VideoClip_Ended),(float)_videoLenght);
     }
 
     public void Get_videoLenght()

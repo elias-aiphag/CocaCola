@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Transparency
+  m_Name: Transparency 1
   m_Shader: {fileID: 4800000, guid: a659c709b8623d848ab873f149ec8a72, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords:
@@ -44,7 +44,7 @@ Material:
     - _MainTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0.03, y: 0}
+        m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
