@@ -11,7 +11,7 @@ public class ARManager : MonoBehaviour
 
     [Header("VideoObjects")]
     [SerializeField] private AudioPlayer audioPlayer;
-    [SerializeField] private List<MediaPlayer> bigVideoPlayer;
+    [SerializeField] private List<MediaPlayer> videoPlayer;
 
     [Header("Arrow")]
     [SerializeField] public Arrow arrow;
@@ -19,12 +19,8 @@ public class ARManager : MonoBehaviour
     [Header("Counter")]
     [SerializeField] private int _counter = 0;
 
-    [Header("Canvas Static")]
-    [SerializeField] private Transform _staticUI;
-
     void Awake()
     {
-        //Get_staticUI();
         Init();
     }
 
@@ -47,7 +43,6 @@ public class ARManager : MonoBehaviour
         {
             Debug.Log("time to : animacion 1");
 
-            //Set_parent_videoPlayer(0);
             Set_Status_videoPlayer(0, true);
         }
 
@@ -70,7 +65,6 @@ public class ARManager : MonoBehaviour
         {
             Debug.Log("time to : animacion 2");
 
-            //Set_parent_videoPlayer(2);
             Set_Status_videoPlayer(2, true);
             Set_Status_videoPlayer(0, false);
         }
@@ -95,17 +89,12 @@ public class ARManager : MonoBehaviour
 
     public void Set_Status_videoPlayer(int i, bool b)
     {
-        bigVideoPlayer[i].gameObject.SetActive(b);
-    }
-
-    public void Set_parent_videoPlayer(int i)
-    {
-        bigVideoPlayer[i].transform.SetParent(_staticUI);
+        videoPlayer[i].gameObject.SetActive(b);
     }
 
     private void Deactivate_All_VideoPlayer()
     {
-        foreach(MediaPlayer e in bigVideoPlayer)
+        foreach(MediaPlayer e in videoPlayer)
         {
             e.gameObject.SetActive(false);
         }
@@ -115,11 +104,5 @@ public class ARManager : MonoBehaviour
     {
         bool _status = b;
         audioPlayer.gameObject.SetActive(_status);
-    }
-
-    private void Get_staticUI()
-    {
-        GameObject _ui = GameObject.Find("Canvas_Static_UI");
-        _staticUI = _ui.gameObject.transform;
     }
 }
