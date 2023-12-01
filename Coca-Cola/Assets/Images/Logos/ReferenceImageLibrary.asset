@@ -33,7 +33,7 @@ MonoBehaviour:
     m_SerializedTextureGuid:
       m_GuidLow: 3932984790126911073
       m_GuidHigh: 4690594318579695226
-    m_Size: {x: 0.7, y: 0.7}
+    m_Size: {x: 0.15, y: 0.15}
     m_SpecifySize: 0
     m_Name: InvokeTarget_COLA
     m_Texture: {fileID: 0}
