@@ -26,14 +26,24 @@ MonoBehaviour:
     m_Size: {x: 0, y: 0}
     m_SpecifySize: 0
     m_Name: InvokeTarget_G
-    m_Texture: {fileID: 0}
+    m_Texture: {fileID: 2800000, guid: 7cfabe156eba04e43aa2799524d6edb2, type: 3}
   - m_SerializedGuid:
       m_GuidLow: 5376538632434347039
       m_GuidHigh: 10369794665534225047
     m_SerializedTextureGuid:
       m_GuidLow: 3932984790126911073
       m_GuidHigh: 4690594318579695226
-    m_Size: {x: 0, y: 0}
+    m_Size: {x: 0.7, y: 0.7}
     m_SpecifySize: 0
     m_Name: InvokeTarget_COLA
     m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 5098793258100276067
+      m_GuidHigh: 10361648110332387244
+    m_SerializedTextureGuid:
+      m_GuidLow: 8427505753611000808
+      m_GuidHigh: 5395282953965536697
+    m_Size: {x: 0, y: 0}
+    m_SpecifySize: 0
+    m_Name: InvokeTarget_Fanta
+    m_Texture: {fileID: 2800000, guid: 028b5be883d574f4b905d6dd42e5df4a, type: 3}

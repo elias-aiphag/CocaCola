@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Estacion : MonoBehaviour
 {
@@ -10,10 +12,10 @@ public class Estacion : MonoBehaviour
     [SerializeField] private TextMeshProUGUI mainText;
     [SerializeField] private String title;
 
-    [Header("Audio")]
-    [SerializeField] private AudioManager audioManager;
-    [SerializeField] private AudioClip[] audioSound;
-
+    [Header("UI")]
+    [SerializeField] private TextMeshProUGUI audioLenght_text;
+    [SerializeField] private Slider sliderAudioLenght;
+    
     void Start()
     {
         ReloadTitle(title);
@@ -25,14 +27,37 @@ public class Estacion : MonoBehaviour
         mainText.text = _text;
     }
 
-    public void PlayClip(int number)
+    public void SliderUpdate(float f)
     {
-        AudioClip clip = audioSound[number];
-        audioManager.PlayAudioClip(clip);
+        float _f = f;
+        sliderAudioLenght.value = _f;
+        //Debug.Log("slider audio lenght : " + _f);
     }
 
-    private void LoadClipSound(AudioClip aClip)
+    public void SliderMaxAmp(float f)
     {
-        audioManager.PlayAudioClip(aClip);
+        float _f = f;
+        sliderAudioLenght.maxValue = _f;
+        //Debug.Log("slider max amplitude : " + f);
     }
+
+    public void TextAudioLenght(float f)
+    {
+        string _s = f.ToString();
+        audioLenght_text.text = _s;
+        //Debug.Log("audio lenght text : " + _s);
+    }
+
+    public void ClipEnded()
+    {
+        Debug.Log(title + " has ended, can continue");
+        //Deactive();
+        //sARManager.ins.Next();
+    }
+
+    private void Deactive()
+    {
+        this.gameObject.SetActive(false);
+    }
+
 }
