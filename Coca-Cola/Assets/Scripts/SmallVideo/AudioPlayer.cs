@@ -23,6 +23,7 @@ public class AudioPlayer : MonoBehaviour
     [SerializeField] private float timeTo_Arrow;
     [SerializeField] private float timeTo_Animation2;
     [SerializeField] private float timeTo_Video2;
+    [SerializeField] private float timeTo_Animation3;
 
     void Start()
     {
@@ -53,8 +54,9 @@ public class AudioPlayer : MonoBehaviour
         Invoke(nameof(Call_Next),timeTo_Arrow);
         Invoke(nameof(Call_Next),timeTo_Animation2);
         Invoke(nameof(Call_Next),timeTo_Video2);
+        Invoke(nameof(Call_Next),timeTo_Animation3);
 
-        //Invoke(nameof(Clip_Ended),_lenghtFloat);
+        Invoke(nameof(Clip_Ended),_lenghtFloat);
     }
 
     public void Get_videoLenght()

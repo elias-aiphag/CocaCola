@@ -9,7 +9,6 @@ public class ARManager : MonoBehaviour
 {
     public static ARManager ins;
 
-    [Header("VideoObjects")]
     [SerializeField] private AudioPlayer audioPlayer;
     [SerializeField] private List<MediaPlayer> videoPlayer;
 
@@ -66,7 +65,7 @@ public class ARManager : MonoBehaviour
             Debug.Log("time to : animacion 2");
 
             Set_Status_videoPlayer(2, true);
-            Set_Status_videoPlayer(0, false);
+            Set_Status_videoPlayer(1, false);
         }
 
         if(_counter == 5)
@@ -77,7 +76,22 @@ public class ARManager : MonoBehaviour
             Set_Status_videoPlayer(2, false);
             Set_Enable_Arrow(false);
         }
-        
+
+        if(_counter == 6)
+        {
+            Debug.Log("time to : animacion 3");
+
+            Set_Status_videoPlayer(4, true);
+            Set_Status_videoPlayer(3, false);
+        }
+
+        if(_counter == 7)
+        {
+            Debug.Log("Clear All");
+
+            Set_Status_videoPlayer(4, false);
+        }
+
         else { return; }
     }
 

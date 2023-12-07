@@ -15,17 +15,6 @@ public class Estacion : MonoBehaviour
     [Header("UI")]
     [SerializeField] private TextMeshProUGUI audioLenght_text;
     [SerializeField] private Slider sliderAudioLenght;
-    
-    void Start()
-    {
-        ReloadTitle(title);
-    }
-
-    private void ReloadTitle(string s)
-    {
-        string _text = s;
-        mainText.text = _text;
-    }
 
     public void SliderUpdate(float f)
     {
@@ -59,5 +48,4 @@ public class Estacion : MonoBehaviour
     {
         this.gameObject.SetActive(false);
     }
-
 }
